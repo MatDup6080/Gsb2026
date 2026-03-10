@@ -14,7 +14,7 @@ namespace Interface
         public FrmVisiteModification(Session uneSession) : base(uneSession)
         {
             InitializeComponent();
-
+            
         }
 
         private void FrmVisiteModification_Load(object sender, EventArgs e)
