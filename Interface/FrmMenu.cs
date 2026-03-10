@@ -13,5 +13,10 @@ namespace Interface
         {
             lblTitre.Text = "Gestion des visites";
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -253,6 +253,7 @@ namespace Donnee
                 if (visites.TryGetValue(idVisite, out Visite? visite) && medicaments.TryGetValue(idMedicament, out Medicament? medicament))
                 {
                     visite.ajouterEchantillon(medicament, quantite);
+
                 }
             }
         }
