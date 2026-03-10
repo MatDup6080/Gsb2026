@@ -75,7 +75,7 @@ namespace Interface
         {
             // ouvrirFormulaire(new FrmPraticienListe(session));
         }
-
+        
         private void nouveauPraticien_Click(object sender, EventArgs e)
         {
             // ouvrirFormulaire(new FrmPraticienAjout(session));
