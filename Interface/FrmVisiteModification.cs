@@ -14,12 +14,11 @@ namespace Interface
         public FrmVisiteModification(Session uneSession) : base(uneSession)
         {
             InitializeComponent();
-            
         }
 
         private void FrmVisiteModification_Load(object sender, EventArgs e)
         {
-            this.lblTitre.Text = "Modification d'une visite";
+            lblTitre.Text = "Modifier une visite";
         }
     }
 }

@@ -147,7 +147,7 @@ namespace Donnee
             {
                 string id = curseur.GetString("id");
                 string libelle = curseur.GetString("libelle");
-                lesFamilles.Add(new Famille(id, libelle ));
+                lesFamilles.Add(new Famille(id, libelle));
             }
             return lesFamilles;
         }
@@ -214,47 +214,47 @@ namespace Donnee
         /// <param name="lesSpecialites">Liste des spécialités</param>
         /// <returns>Liste des lesPraticiens</returns>
         private static List<Praticien> chargerMesPraticiens(MySqlConnection cnx, List<TypePraticien> lesTypes, List<Specialite> lesSpecialites)
-		 {
-			 // Liste qui sera retournée
-			 var mesPraticiens = new List<Praticien>();
+        {
+            // Liste qui sera retournée
+            var mesPraticiens = new List<Praticien>();
 
-			 // Transformons les listes des types et spécialités en dictionnaires pour éviter des recherches linéaires O(n)
-			 var types = lesTypes.ToDictionary(t => t.Id);
-			 var specialites = lesSpecialites.ToDictionary(s => s.Id);
+            // Transformons les listes des types et spécialités en dictionnaires pour éviter des recherches linéaires O(n)
+            var types = lesTypes.ToDictionary(t => t.Id);
+            var specialites = lesSpecialites.ToDictionary(s => s.Id);
 
-			 string sql = "SELECT id, nom, prenom, rue, codePostal, ville, email, telephone, idType, idSpecialite FROM mespraticiens;";
-			 using MySqlCommand cmd = new MySqlCommand(sql, cnx);
-			 using MySqlDataReader curseur = cmd.ExecuteReader();
+            string sql = "SELECT id, nom, prenom, rue, codePostal, ville, email, telephone, idType, idSpecialite FROM mespraticiens;";
+            using MySqlCommand cmd = new MySqlCommand(sql, cnx);
+            using MySqlDataReader curseur = cmd.ExecuteReader();
 
-			 // récupération des index des colonnes pour éviter de les rechercher à chaque itération
-			 int indexSpecialite = curseur.GetOrdinal("idSpecialite");
+            // récupération des index des colonnes pour éviter de les rechercher à chaque itération
+            int indexSpecialite = curseur.GetOrdinal("idSpecialite");
 
-			 while (curseur.Read())
-			 {
-				 // Récupération du type via le dictionnaire (O(1))
-				 string idType = curseur.GetString("idType");
-				 TypePraticien? type = null;
-				 types.TryGetValue(idType, out type);
+            while (curseur.Read())
+            {
+                // Récupération du type via le dictionnaire (O(1))
+                string idType = curseur.GetString("idType");
+                TypePraticien? type = null;
+                types.TryGetValue(idType, out type);
 
-				 // La spécialité peut être null, il faut vérifier avant de tenter de la récupérer
-				 Specialite? specialite = curseur.IsDBNull(indexSpecialite) ? null : specialites[curseur.GetString(indexSpecialite)];
+                // La spécialité peut être null, il faut vérifier avant de tenter de la récupérer
+                Specialite? specialite = curseur.IsDBNull(indexSpecialite) ? null : specialites[curseur.GetString(indexSpecialite)];
 
-				 // Création du praticien
-				 mesPraticiens.Add(new Praticien(
-					 curseur.GetInt32("id"),
-					 curseur.GetString("nom"),
-					 curseur.GetString("prenom"),
-					 curseur.GetString("rue"),
-					 curseur.GetString("codePostal"),
-					 curseur.GetString("ville"),
-					 curseur.GetString("email"),
-					 curseur.GetString("telephone"),
-					 type,
-					 specialite));
-			 }
+                // Création du praticien
+                mesPraticiens.Add(new Praticien(
+                    curseur.GetInt32("id"),
+                    curseur.GetString("nom"),
+                    curseur.GetString("prenom"),
+                    curseur.GetString("rue"),
+                    curseur.GetString("codePostal"),
+                    curseur.GetString("ville"),
+                    curseur.GetString("email"),
+                    curseur.GetString("telephone"),
+                    type,
+                    specialite));
+            }
 
-			 return mesPraticiens;
-		 }
+            return mesPraticiens;
+        }
 
 
         /// <summary>
@@ -355,25 +355,39 @@ namespace Donnee
         /// <returns>ID de la nouvelle visite, ou 0 en cas d'erreur</returns>
         static public int ajouterRendezVous(int idPraticien, int idMotif, DateTime uneDate)
         {
-            string sql  = "ajouterRendezVous";
+            string sql = "ajouterRendezVous";
 
             using MySqlConnection cnx = ouvrirConnexion();
 
-           using var cmd = new MySqlCommand(sql, cnx);
+            using var cmd = new MySqlCommand(sql, cnx);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            //passer les paramètres
-
+            // passer les paramètres
             cmd.Parameters.AddWithValue("_idPraticien", idPraticien);
             cmd.Parameters.AddWithValue("_idMotif", idMotif);
-            cmd.Parameters.AddWithValue("_dateEtHeure", uneDate);
+            cmd.Parameters.AddWithValue("_dateEtHeur", uneDate);
 
-            //solution A 
-            var paramSortie = new MySqlParameter("_idVisite", MySqlDbType.Int32);
+            /*
+			// solution A
+			var paramSortie = new MySqlParameter("_idVisite", MySqlDbType.Int32);
             paramSortie.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(paramSortie);
             cmd.ExecuteNonQuery();
             return (int) paramSortie.Value!;
+            
+            // solution B
+            return Convert.ToInt32(cmd.ExecuteScalar());
+            */
+            // solution C
+            cmd.ExecuteNonQuery();
+            return Convert.ToInt32(cmd.LastInsertedId);
+
+
+
+
+
+
+
         }
 
         /// <summary>
@@ -439,7 +453,7 @@ namespace Donnee
         {
         }
 
-      
+
 
 
     }
