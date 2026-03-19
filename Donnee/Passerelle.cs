@@ -435,8 +435,9 @@ namespace Donnee
         /// <param name="uneVisite">Visite à enregistrer</param>
         static public void enregistrerBilan(Visite uneVisite)
         {
-
-
+            string sql = "enregistrerBilan";
+            using MySqlConnection cnx = ouvrirConnexion();
+            using var cmd = new MySqlCommand(sql, cnx);
         }
 
         /// <summary>

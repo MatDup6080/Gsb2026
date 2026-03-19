@@ -63,7 +63,7 @@ namespace Interface
 
         private void enregistrerBilan_Click(object sender, EventArgs e)
         {
-            // ouvrirFormulaire(new FrmVisiteBilan(session));
+             ouvrirFormulaire(new FrmVisiteBilan(session));
         }
 
         private void consulterVisite_Click(object sender, EventArgs e)
@@ -105,6 +105,8 @@ namespace Interface
                 this.Close();
             }
         }
+       
+
 
         private void parametrerComposant()
         {
