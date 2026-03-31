@@ -31,32 +31,36 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVisiteBilan));
             panelCentral = new Panel();
             panelHaut = new Panel();
+            lblMessage = new Label();
             lblPraticien = new Label();
             label2 = new Label();
             lblDate = new Label();
             label1 = new Label();
             btnSuivant = new Button();
             btnPrecedent = new Button();
-            cbxEchantillon = new Panel();
+            PanelDroit = new Panel();
+            cbxEchantillon = new ComboBox();
             dgvEchantillon = new DataGridView();
             label6 = new Label();
             btnAjouter = new Button();
             cptQuantite = new NumericUpDown();
-            comboBox1 = new ComboBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             panelGauche = new Panel();
-            cbxSecondMedicament = new ComboBox();
-            cbxPremierMedicament = new ComboBox();
+            msgBilan = new Label();
             msgSecondMedicament = new Label();
             msgPremierMedicament = new Label();
-            msgBilan = new Label();
+            cbxSecondMedicament = new ComboBox();
+            cbxPremierMedicament = new ComboBox();
+            lblMedicament2 = new Label();
+            lblMedicament1 = new Label();
+            lblBilan = new Label();
             btnEnregistrer = new Button();
             txtBilan = new TextBox();
             panelCentral.SuspendLayout();
             panelHaut.SuspendLayout();
-            cbxEchantillon.SuspendLayout();
+            PanelDroit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEchantillon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cptQuantite).BeginInit();
             panelGauche.SuspendLayout();
@@ -69,7 +73,7 @@
             // panelCentral
             // 
             panelCentral.Controls.Add(panelHaut);
-            panelCentral.Controls.Add(cbxEchantillon);
+            panelCentral.Controls.Add(PanelDroit);
             panelCentral.Controls.Add(panelGauche);
             panelCentral.Location = new Point(12, 92);
             panelCentral.Name = "panelCentral";
@@ -78,6 +82,7 @@
             // 
             // panelHaut
             // 
+            panelHaut.Controls.Add(lblMessage);
             panelHaut.Controls.Add(lblPraticien);
             panelHaut.Controls.Add(label2);
             panelHaut.Controls.Add(lblDate);
@@ -88,6 +93,15 @@
             panelHaut.Name = "panelHaut";
             panelHaut.Size = new Size(743, 50);
             panelHaut.TabIndex = 1;
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Location = new Point(79, 32);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(38, 15);
+            lblMessage.TabIndex = 6;
+            lblMessage.Text = "label7";
             // 
             // lblPraticien
             // 
@@ -134,6 +148,7 @@
             btnSuivant.TabIndex = 1;
             btnSuivant.Text = ">";
             btnSuivant.UseVisualStyleBackColor = false;
+            btnSuivant.Click += btnSuivant_Click;
             // 
             // btnPrecedent
             // 
@@ -144,29 +159,39 @@
             btnPrecedent.TabIndex = 0;
             btnPrecedent.Text = "<";
             btnPrecedent.UseVisualStyleBackColor = false;
+            btnPrecedent.Click += btnPrecedent_Click;
+            // 
+            // PanelDroit
+            // 
+            PanelDroit.Controls.Add(cbxEchantillon);
+            PanelDroit.Controls.Add(dgvEchantillon);
+            PanelDroit.Controls.Add(label6);
+            PanelDroit.Controls.Add(btnAjouter);
+            PanelDroit.Controls.Add(cptQuantite);
+            PanelDroit.Controls.Add(label5);
+            PanelDroit.Controls.Add(label4);
+            PanelDroit.Controls.Add(label3);
+            PanelDroit.Location = new Point(392, 59);
+            PanelDroit.Name = "PanelDroit";
+            PanelDroit.Size = new Size(354, 248);
+            PanelDroit.TabIndex = 1;
             // 
             // cbxEchantillon
             // 
-            cbxEchantillon.Controls.Add(dgvEchantillon);
-            cbxEchantillon.Controls.Add(label6);
-            cbxEchantillon.Controls.Add(btnAjouter);
-            cbxEchantillon.Controls.Add(cptQuantite);
-            cbxEchantillon.Controls.Add(comboBox1);
-            cbxEchantillon.Controls.Add(label5);
-            cbxEchantillon.Controls.Add(label4);
-            cbxEchantillon.Controls.Add(label3);
-            cbxEchantillon.Location = new Point(392, 59);
+            cbxEchantillon.FormattingEnabled = true;
+            cbxEchantillon.Location = new Point(17, 48);
             cbxEchantillon.Name = "cbxEchantillon";
-            cbxEchantillon.Size = new Size(354, 248);
-            cbxEchantillon.TabIndex = 1;
+            cbxEchantillon.Size = new Size(121, 23);
+            cbxEchantillon.TabIndex = 8;
             // 
             // dgvEchantillon
             // 
             dgvEchantillon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEchantillon.Location = new Point(17, 102);
             dgvEchantillon.Name = "dgvEchantillon";
-            dgvEchantillon.Size = new Size(298, 143);
+            dgvEchantillon.Size = new Size(320, 143);
             dgvEchantillon.TabIndex = 7;
+            dgvEchantillon.CellClick += dgvEchantillon_CellClick;
             // 
             // label6
             // 
@@ -186,6 +211,7 @@
             btnAjouter.TabIndex = 5;
             btnAjouter.Text = "Ajouter";
             btnAjouter.UseVisualStyleBackColor = false;
+            btnAjouter.Click += btnAjouter_Click;
             // 
             // cptQuantite
             // 
@@ -196,14 +222,6 @@
             cptQuantite.Size = new Size(41, 23);
             cptQuantite.TabIndex = 4;
             cptQuantite.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(17, 49);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(142, 23);
-            comboBox1.TabIndex = 3;
             // 
             // label5
             // 
@@ -234,11 +252,14 @@
             // 
             // panelGauche
             // 
-            panelGauche.Controls.Add(cbxSecondMedicament);
-            panelGauche.Controls.Add(cbxPremierMedicament);
+            panelGauche.Controls.Add(msgBilan);
             panelGauche.Controls.Add(msgSecondMedicament);
             panelGauche.Controls.Add(msgPremierMedicament);
-            panelGauche.Controls.Add(msgBilan);
+            panelGauche.Controls.Add(cbxSecondMedicament);
+            panelGauche.Controls.Add(cbxPremierMedicament);
+            panelGauche.Controls.Add(lblMedicament2);
+            panelGauche.Controls.Add(lblMedicament1);
+            panelGauche.Controls.Add(lblBilan);
             panelGauche.Controls.Add(btnEnregistrer);
             panelGauche.Controls.Add(txtBilan);
             panelGauche.Location = new Point(3, 59);
@@ -246,10 +267,40 @@
             panelGauche.Size = new Size(383, 248);
             panelGauche.TabIndex = 0;
             // 
+            // msgBilan
+            // 
+            msgBilan.AutoSize = true;
+            msgBilan.ForeColor = Color.Red;
+            msgBilan.Location = new Point(12, 230);
+            msgBilan.Name = "msgBilan";
+            msgBilan.Size = new Size(38, 15);
+            msgBilan.TabIndex = 9;
+            msgBilan.Text = "label9";
+            // 
+            // msgSecondMedicament
+            // 
+            msgSecondMedicament.AutoSize = true;
+            msgSecondMedicament.ForeColor = Color.Red;
+            msgSecondMedicament.Location = new Point(253, 83);
+            msgSecondMedicament.Name = "msgSecondMedicament";
+            msgSecondMedicament.Size = new Size(38, 15);
+            msgSecondMedicament.TabIndex = 8;
+            msgSecondMedicament.Text = "label8";
+            // 
+            // msgPremierMedicament
+            // 
+            msgPremierMedicament.AutoSize = true;
+            msgPremierMedicament.ForeColor = Color.Red;
+            msgPremierMedicament.Location = new Point(12, 84);
+            msgPremierMedicament.Name = "msgPremierMedicament";
+            msgPremierMedicament.Size = new Size(38, 15);
+            msgPremierMedicament.TabIndex = 7;
+            msgPremierMedicament.Text = "label7";
+            // 
             // cbxSecondMedicament
             // 
             cbxSecondMedicament.FormattingEnabled = true;
-            cbxSecondMedicament.Location = new Point(199, 28);
+            cbxSecondMedicament.Location = new Point(199, 50);
             cbxSecondMedicament.Name = "cbxSecondMedicament";
             cbxSecondMedicament.Size = new Size(170, 23);
             cbxSecondMedicament.TabIndex = 6;
@@ -257,55 +308,56 @@
             // cbxPremierMedicament
             // 
             cbxPremierMedicament.FormattingEnabled = true;
-            cbxPremierMedicament.Location = new Point(3, 28);
+            cbxPremierMedicament.Location = new Point(3, 50);
             cbxPremierMedicament.Name = "cbxPremierMedicament";
             cbxPremierMedicament.Size = new Size(166, 23);
             cbxPremierMedicament.TabIndex = 5;
             // 
-            // msgSecondMedicament
+            // lblMedicament2
             // 
-            msgSecondMedicament.AutoSize = true;
-            msgSecondMedicament.Location = new Point(199, 10);
-            msgSecondMedicament.Name = "msgSecondMedicament";
-            msgSecondMedicament.Size = new Size(162, 15);
-            msgSecondMedicament.TabIndex = 4;
-            msgSecondMedicament.Text = "Second médicament proposé";
+            lblMedicament2.AutoSize = true;
+            lblMedicament2.Location = new Point(199, 28);
+            lblMedicament2.Name = "lblMedicament2";
+            lblMedicament2.Size = new Size(162, 15);
+            lblMedicament2.TabIndex = 4;
+            lblMedicament2.Text = "Second médicament proposé";
             // 
-            // msgPremierMedicament
+            // lblMedicament1
             // 
-            msgPremierMedicament.AutoSize = true;
-            msgPremierMedicament.Location = new Point(3, 10);
-            msgPremierMedicament.Name = "msgPremierMedicament";
-            msgPremierMedicament.Size = new Size(166, 15);
-            msgPremierMedicament.TabIndex = 3;
-            msgPremierMedicament.Text = "Premier médicament présenté";
+            lblMedicament1.AutoSize = true;
+            lblMedicament1.Location = new Point(3, 28);
+            lblMedicament1.Name = "lblMedicament1";
+            lblMedicament1.Size = new Size(166, 15);
+            lblMedicament1.TabIndex = 3;
+            lblMedicament1.Text = "Premier médicament présenté";
             // 
-            // msgBilan
+            // lblBilan
             // 
-            msgBilan.AutoSize = true;
-            msgBilan.Location = new Point(122, 84);
-            msgBilan.Name = "msgBilan";
-            msgBilan.Size = new Size(91, 15);
-            msgBilan.TabIndex = 2;
-            msgBilan.Text = "Bilan de la visite";
+            lblBilan.AutoSize = true;
+            lblBilan.Location = new Point(0, 123);
+            lblBilan.Name = "lblBilan";
+            lblBilan.Size = new Size(91, 15);
+            lblBilan.TabIndex = 2;
+            lblBilan.Text = "Bilan de la visite";
             // 
             // btnEnregistrer
             // 
             btnEnregistrer.BackColor = Color.Red;
-            btnEnregistrer.Location = new Point(101, 176);
+            btnEnregistrer.Location = new Point(210, 193);
             btnEnregistrer.Name = "btnEnregistrer";
             btnEnregistrer.Size = new Size(170, 34);
             btnEnregistrer.TabIndex = 1;
             btnEnregistrer.Text = "Enregistrer la fiche visite";
             btnEnregistrer.UseVisualStyleBackColor = false;
+            btnEnregistrer.Click += btnEnregistrer_Click;
             // 
             // txtBilan
             // 
             txtBilan.AcceptsReturn = true;
-            txtBilan.Location = new Point(79, 113);
+            txtBilan.Location = new Point(3, 141);
             txtBilan.Multiline = true;
             txtBilan.Name = "txtBilan";
-            txtBilan.Size = new Size(210, 23);
+            txtBilan.Size = new Size(201, 86);
             txtBilan.TabIndex = 0;
             // 
             // FrmVisiteBilan
@@ -326,8 +378,8 @@
             panelCentral.ResumeLayout(false);
             panelHaut.ResumeLayout(false);
             panelHaut.PerformLayout();
-            cbxEchantillon.ResumeLayout(false);
-            cbxEchantillon.PerformLayout();
+            PanelDroit.ResumeLayout(false);
+            PanelDroit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEchantillon).EndInit();
             ((System.ComponentModel.ISupportInitialize)cptQuantite).EndInit();
             panelGauche.ResumeLayout(false);
@@ -340,11 +392,13 @@
 
         private Panel panelCentral;
         private Panel panelHaut;
-        private Panel cbxEchantillon;
+        private Panel PanelDroit;
         private Panel panelGauche;
         private TextBox txtBilan;
         private Button btnEnregistrer;
-        private Label msgPremierMedicament;
+        private Label lblMedicament1;
+        private Label lblMedicament2;
+        private Label lblBilan;
         private Label msgBilan;
         private Label msgSecondMedicament;
         private ComboBox cbxPremierMedicament;
@@ -356,12 +410,14 @@
         private Label label2;
         private Label lblDate;
         private Label label3;
-        private ComboBox comboBox1;
         private Label label5;
         private Label label4;
         private NumericUpDown cptQuantite;
         private Label label6;
         private Button btnAjouter;
         private DataGridView dgvEchantillon;
+        private ComboBox cbxEchantillon;
+        private Label lblMessage;
+        private Label msgPremierMedicament;
     }
 }

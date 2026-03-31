@@ -433,11 +433,56 @@ namespace Donnee
         /// Enregistre le bilan d'une visite et les échantillons associés.
         /// </summary>
         /// <param name="uneVisite">Visite à enregistrer</param>
+        /// <summary>
+        /// Enregistre le bilan d'une visite et les échantillons associés.
+        /// </summary>
+        /// <param name="uneVisite">Visite à enregistrer</param>
         static public void enregistrerBilan(Visite uneVisite)
         {
-            string sql = "enregistrerBilan";
             using MySqlConnection cnx = ouvrirConnexion();
-            using var cmd = new MySqlCommand(sql, cnx);
+            using var cmd = new MySqlCommand();
+            cmd.Connection = cnx;
+
+            // Déclaration de la transaction
+            MySqlTransaction uneTransaction = cnx.BeginTransaction();
+            cmd.Transaction = uneTransaction;
+
+            try
+            {
+                // 1. Enregistrer le bilan via la procédure stockée
+                cmd.CommandText = "enregistrerBilanVisite";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("_idVisite", uneVisite.Id);
+                cmd.Parameters.AddWithValue("_bilan", uneVisite.Bilan);
+                cmd.Parameters.AddWithValue("_premierMedicament", uneVisite.PremierMedicament!.Id);
+                cmd.Parameters.AddWithValue("_secondMedicament", uneVisite.SecondMedicament?.Id ?? (object)DBNull.Value);
+
+                cmd.ExecuteNonQuery();
+
+                // 2. Enregistrer chaque échantillon via la procédure stockée
+                foreach (KeyValuePair<Medicament, int> echantillon in uneVisite)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = "ajouterEchantillon";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("_idVisite", uneVisite.Id);
+                    cmd.Parameters.AddWithValue("_idMedicament", echantillon.Key.Id);
+                    cmd.Parameters.AddWithValue("_quantite", echantillon.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Valider la transaction
+                uneTransaction.Commit();
+            }
+            catch
+            {
+                // Annuler la transaction en cas d'erreur
+                uneTransaction.Rollback();
+                throw;
+            }
         }
 
         /// <summary>
