@@ -281,7 +281,7 @@
             // 
             msgSecondMedicament.AutoSize = true;
             msgSecondMedicament.ForeColor = Color.Red;
-            msgSecondMedicament.Location = new Point(253, 83);
+            msgSecondMedicament.Location = new Point(199, 84);
             msgSecondMedicament.Name = "msgSecondMedicament";
             msgSecondMedicament.Size = new Size(38, 15);
             msgSecondMedicament.TabIndex = 8;

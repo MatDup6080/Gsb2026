@@ -36,18 +36,18 @@
             label2 = new Label();
             label1 = new Label();
             messageIntervale = new Label();
-            pictureBox3 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
+            imgApercu = new PictureBox();
+            imgImprimer = new PictureBox();
+            imgGsb = new PictureBox();
             printRendezVous = new System.Drawing.Printing.PrintDocument();
             choixImprimante = new PrintDialog();
             aperçuRendezVous = new PrintPreviewDialog();
             message = new Label();
             panelCentral.SuspendLayout();
             panelSaisie.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgApercu).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgImprimer).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgGsb).BeginInit();
             SuspendLayout();
             // 
             // lblTitre
@@ -57,7 +57,7 @@
             // panelCentral
             // 
             panelCentral.Controls.Add(panelSaisie);
-            panelCentral.Controls.Add(pictureBox1);
+            panelCentral.Controls.Add(imgGsb);
             panelCentral.Location = new Point(0, 91);
             panelCentral.Name = "panelCentral";
             panelCentral.Size = new Size(788, 311);
@@ -70,8 +70,8 @@
             panelSaisie.Controls.Add(label2);
             panelSaisie.Controls.Add(label1);
             panelSaisie.Controls.Add(messageIntervale);
-            panelSaisie.Controls.Add(pictureBox3);
-            panelSaisie.Controls.Add(pictureBox2);
+            panelSaisie.Controls.Add(imgApercu);
+            panelSaisie.Controls.Add(imgImprimer);
             panelSaisie.Location = new Point(426, 22);
             panelSaisie.Name = "panelSaisie";
             panelSaisie.Size = new Size(347, 271);
@@ -120,32 +120,34 @@
             messageIntervale.TabIndex = 2;
             messageIntervale.Text = "msg";
             // 
-            // pictureBox3
+            // imgApercu
             // 
-            pictureBox3.BackgroundImage = Properties.Resources.apercu;
-            pictureBox3.Location = new Point(22, 132);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(152, 123);
-            pictureBox3.TabIndex = 1;
-            pictureBox3.TabStop = false;
+            imgApercu.BackgroundImage = Properties.Resources.apercu;
+            imgApercu.Location = new Point(22, 132);
+            imgApercu.Name = "imgApercu";
+            imgApercu.Size = new Size(152, 123);
+            imgApercu.TabIndex = 1;
+            imgApercu.TabStop = false;
+            imgApercu.Click += imgApercu_Click;
             // 
-            // pictureBox2
+            // imgImprimer
             // 
-            pictureBox2.BackgroundImage = Properties.Resources.imprimer;
-            pictureBox2.Location = new Point(205, 132);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(128, 123);
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
+            imgImprimer.BackgroundImage = Properties.Resources.imprimer;
+            imgImprimer.Location = new Point(205, 132);
+            imgImprimer.Name = "imgImprimer";
+            imgImprimer.Size = new Size(128, 123);
+            imgImprimer.TabIndex = 0;
+            imgImprimer.TabStop = false;
+            imgImprimer.Click += imgImprimer_Click;
             // 
-            // pictureBox1
+            // imgGsb
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.logoGSB;
-            pictureBox1.Location = new Point(16, 22);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(387, 242);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            imgGsb.BackgroundImage = Properties.Resources.logoGSB;
+            imgGsb.Location = new Point(16, 22);
+            imgGsb.Name = "imgGsb";
+            imgGsb.Size = new Size(387, 242);
+            imgGsb.TabIndex = 0;
+            imgGsb.TabStop = false;
             // 
             // choixImprimante
             // 
@@ -190,19 +192,19 @@
             panelCentral.ResumeLayout(false);
             panelSaisie.ResumeLayout(false);
             panelSaisie.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgApercu).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgImprimer).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgGsb).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Panel panelCentral;
-        private PictureBox pictureBox1;
+        private PictureBox imgGsb;
         private Panel panelSaisie;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
+        private PictureBox imgApercu;
+        private PictureBox imgImprimer;
         private DateTimePicker dptDebut;
         private Label label2;
         private Label label1;
