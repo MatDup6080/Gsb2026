@@ -12,7 +12,7 @@ namespace Interface
     public partial class FrmVisiteImpression : FrmBase
     {
         private List<Visite> lesVisites;
-        public FrmVisiteImpression(Session uneSession) : base(uneSession)
+        public FrmVisiteImpression (Session uneSession) : base(uneSession)
         {
             InitializeComponent();
         }
