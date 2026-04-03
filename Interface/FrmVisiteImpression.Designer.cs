@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVisiteImpression));
             panelCentral = new Panel();
             panelSaisie = new Panel();
+            imgApercu = new PictureBox();
             dtpFin = new DateTimePicker();
             dptDebut = new DateTimePicker();
             label2 = new Label();
             label1 = new Label();
             messageIntervale = new Label();
-            imgApercu = new PictureBox();
             imgImprimer = new PictureBox();
             imgGsb = new PictureBox();
             printRendezVous = new System.Drawing.Printing.PrintDocument();
@@ -65,17 +65,28 @@
             // 
             // panelSaisie
             // 
+            panelSaisie.Controls.Add(imgApercu);
             panelSaisie.Controls.Add(dtpFin);
             panelSaisie.Controls.Add(dptDebut);
             panelSaisie.Controls.Add(label2);
             panelSaisie.Controls.Add(label1);
             panelSaisie.Controls.Add(messageIntervale);
-            panelSaisie.Controls.Add(imgApercu);
             panelSaisie.Controls.Add(imgImprimer);
             panelSaisie.Location = new Point(426, 22);
             panelSaisie.Name = "panelSaisie";
             panelSaisie.Size = new Size(347, 271);
             panelSaisie.TabIndex = 1;
+            // 
+            // imgApercu
+            // 
+            imgApercu.Image = Properties.Resources.apercu;
+            imgApercu.Location = new Point(22, 132);
+            imgApercu.Name = "imgApercu";
+            imgApercu.Size = new Size(142, 136);
+            imgApercu.SizeMode = PictureBoxSizeMode.StretchImage;
+            imgApercu.TabIndex = 7;
+            imgApercu.TabStop = false;
+            imgApercu.Click += imgApercu_Click;
             // 
             // dtpFin
             // 
@@ -120,16 +131,6 @@
             messageIntervale.TabIndex = 2;
             messageIntervale.Text = "msg";
             // 
-            // imgApercu
-            // 
-            imgApercu.BackgroundImage = Properties.Resources.apercu;
-            imgApercu.Location = new Point(22, 132);
-            imgApercu.Name = "imgApercu";
-            imgApercu.Size = new Size(152, 123);
-            imgApercu.TabIndex = 1;
-            imgApercu.TabStop = false;
-            imgApercu.Click += imgApercu_Click;
-            // 
             // imgImprimer
             // 
             imgImprimer.BackgroundImage = Properties.Resources.imprimer;
@@ -148,6 +149,10 @@
             imgGsb.Size = new Size(387, 242);
             imgGsb.TabIndex = 0;
             imgGsb.TabStop = false;
+            // 
+            // printRendezVous
+            // 
+            printRendezVous.PrintPage += printRendezVous_PrintPage;
             // 
             // choixImprimante
             // 
@@ -203,7 +208,6 @@
         private Panel panelCentral;
         private PictureBox imgGsb;
         private Panel panelSaisie;
-        private PictureBox imgApercu;
         private PictureBox imgImprimer;
         private DateTimePicker dptDebut;
         private Label label2;
@@ -214,5 +218,6 @@
         private PrintDialog choixImprimante;
         private PrintPreviewDialog aperçuRendezVous;
         private Label message;
+        private PictureBox imgApercu;
     }
 }

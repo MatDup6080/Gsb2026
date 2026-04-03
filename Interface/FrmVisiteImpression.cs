@@ -155,7 +155,12 @@ namespace Interface
             List<Visite> visitesPeriode = getVisitesSurPeriode();
 
             int margeHaut = e.MarginBounds.Top;
-            int margeGauche = e.MarginBounds.Left;
+            int largeurPage = e.PageBounds.Width;
+
+            // Calcul anticipé de la largeur totale pour centrer
+            int largeurTotale = 160 + 55 + 140 + 100 + 140 + 100;
+
+            int margeGauche = (largeurPage - largeurTotale) / 2;
             int hauteurLigne = 25;
 
             Font policeEntete = new Font("Arial", 10, FontStyle.Bold);
@@ -167,16 +172,15 @@ namespace Interface
 
             var lesColonnes = new[]
             {
-                new { Titre = "Date",      Largeur = 170, Alignement = StringAlignment.Near   },
-                new { Titre = "Heure",     Largeur = 80,  Alignement = StringAlignment.Center },
-                new { Titre = "Praticien", Largeur = 200, Alignement = StringAlignment.Near   },
-                new { Titre = "Téléphone", Largeur = 120, Alignement = StringAlignment.Near   },
-                new { Titre = "Lieu",      Largeur = 200, Alignement = StringAlignment.Near   },
-                new { Titre = "Motif",     Largeur = 200, Alignement = StringAlignment.Near   }
-            };
+    new { Titre = "Date",      Largeur = 160, Alignement = StringAlignment.Near   },
+    new { Titre = "Heure",     Largeur = 55,  Alignement = StringAlignment.Center },
+    new { Titre = "Praticien", Largeur = 140, Alignement = StringAlignment.Near   },
+    new { Titre = "Téléphone", Largeur = 100, Alignement = StringAlignment.Near   },
+    new { Titre = "Lieu",      Largeur = 140, Alignement = StringAlignment.Near   },
+    new { Titre = "Motif",     Largeur = 100, Alignement = StringAlignment.Near   }
+};
 
-            int largeurTotale = 0;
-            foreach (var col in lesColonnes) largeurTotale += col.Largeur;
+
 
             // --- Titre centré ---
             string titre = string.Format(
