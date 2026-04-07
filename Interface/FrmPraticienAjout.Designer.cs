@@ -110,7 +110,7 @@
             // 
             messageEmail.AutoSize = true;
             messageEmail.ForeColor = Color.Red;
-            messageEmail.Location = new Point(512, 211);
+            messageEmail.Location = new Point(603, 209);
             messageEmail.Name = "messageEmail";
             messageEmail.Size = new Size(30, 15);
             messageEmail.TabIndex = 29;
@@ -188,7 +188,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(510, 226);
+            label8.Location = new Point(510, 225);
             label8.Name = "label8";
             label8.Size = new Size(57, 15);
             label8.TabIndex = 16;
