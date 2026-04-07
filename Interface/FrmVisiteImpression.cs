@@ -216,7 +216,7 @@ namespace Interface
                 Brush brushFond = lignePaire ? new SolidBrush(Color.AliceBlue) : Brushes.White;
                 e.Graphics.FillRectangle(brushFond, new Rectangle(x, y, largeurTotale, hauteurLigne));
 
-                // Lieu = rue + ville du praticien (correspond au jeu d'essai du PDF)
+                // Lieu = rue + ville du praticien 
                 string lieu = v.LePraticien.Rue + " " + v.LePraticien.Ville;
 
                 string[] valeurs =

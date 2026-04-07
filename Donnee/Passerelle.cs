@@ -500,7 +500,26 @@ namespace Donnee
         /// <returns>ID du nouveau praticien</returns>
         static public int ajouterPraticien(string nom, string prenom, string rue, string codePostal, string ville, string telephone, string email, string unType, string uneSpecialite)
         {
-            return 0;
+            {
+                string sql = "ajouterPraticien";
+
+                using MySqlConnection cnx = ouvrirConnexion();
+                using var cmd = new MySqlCommand(sql, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("_nom", nom);
+                cmd.Parameters.AddWithValue("_prenom", prenom);
+                cmd.Parameters.AddWithValue("_rue", rue);
+                cmd.Parameters.AddWithValue("_codePostal", codePostal);
+                cmd.Parameters.AddWithValue("_ville", ville);
+                cmd.Parameters.AddWithValue("_telephone", telephone);
+                cmd.Parameters.AddWithValue("_email", email);
+                cmd.Parameters.AddWithValue("_idType", unType);
+                cmd.Parameters.AddWithValue("_idSpecialite", (object?)uneSpecialite ?? DBNull.Value);
+
+                cmd.ExecuteNonQuery();
+                return Convert.ToInt32(cmd.LastInsertedId);
+            }
         }
 
         /// <summary>
